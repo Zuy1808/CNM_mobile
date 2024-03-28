@@ -35,8 +35,12 @@ const LoginScreen = ({navigation}) => {
         navigation.navigate('Signup');
     };
 
+    const handleChat = () => {
+      navigation.navigate('ChatList');
+  };
+
     return (
-        <LinearGradient
+      <LinearGradient
       colors={['#A44C89' ,'#4F4F4F', '#545AC8', '#00BCD4']}
       style={styles.container}
     >
@@ -44,24 +48,29 @@ const LoginScreen = ({navigation}) => {
         <Text style={styles.title}>Đăng nhập</Text>
         <TextInput
           placeholder="Email"
+          placeholderTextColor="#ccc"
           style={styles.input}
         />
         <TextInput
           placeholder="Mật khẩu"
+          placeholderTextColor="#ccc"
           secureTextEntry={true}
           style={styles.input}
         />
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={handleChat}>
           <Text style={styles.buttonText}>Đăng nhập</Text>
         </TouchableOpacity>
-        <TouchableOpacity>
-          <Text style={styles.link}>Forgot Password</Text>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Text onPress={handleSignUp} style={styles.link}>No account yet? Sign Up</Text>
-        </TouchableOpacity>
+        <View style={styles.linkContainer}>
+          <TouchableOpacity>
+            <Text style={styles.link}>Quên mật khẩu?</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={handleSignUp}>
+            <Text style={styles.link}>Chưa có tài khoản? Đăng ký ngay</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </LinearGradient>
+    
   );
 };
 
