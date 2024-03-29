@@ -1,6 +1,13 @@
-import React from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import React from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 const ChatScreen = ({ route }) => {
   const { sender } = route.params;
@@ -12,9 +19,17 @@ const ChatScreen = ({ route }) => {
           <Ionicons name="chevron-back" size={24} color="#ffffff" />
         </TouchableOpacity>
         <Text style={styles.headerText}>{sender}</Text>
+        <View style={styles.info}>
+        <TouchableOpacity style={styles.infoButton}>
+          <Ionicons name="call" size={24} color="#ffffff" />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.infoButton}>
+          <Ionicons name="videocam" size={24} color="#ffffff" />
+        </TouchableOpacity>
         <TouchableOpacity style={styles.infoButton}>
           <Ionicons name="information-circle" size={24} color="#ffffff" />
         </TouchableOpacity>
+        </View>
       </View>
       <ScrollView contentContainerStyle={styles.chatContainer}>
         {/* Example messages */}
@@ -23,7 +38,7 @@ const ChatScreen = ({ route }) => {
             <Text style={styles.messageText}>Hello!</Text>
           </View>
         </View>
-        <View style={[styles.messageContainer, styles.messageContainerRight]}>
+        <View style={[styles.messageContainer, styles.messageContainerLeft]}>
           <View style={[styles.messageBubble, styles.receivedMessage]}>
             <Text style={styles.messageText}>Hi there!</Text>
           </View>
@@ -51,26 +66,31 @@ const ChatScreen = ({ route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: "#ffffff",
   },
   header: {
-    backgroundColor: '#4267B2',
-    paddingVertical: 15,
+    backgroundColor: "#4267B2",
+    paddingVertical: 10,
     paddingHorizontal: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent:'space-between'
   },
   backButton: {
     padding: 5,
   },
+  info:{
+    flexDirection: "row",
+    alignItems: "center",
+   justifyContent:"space-between"
+  },
   infoButton: {
-    padding: 5,
+    padding: 10,
   },
   headerText: {
     fontSize: 20,
-    color: '#ffffff',
-    fontWeight: 'bold',
+    color: "#ffffff",
+    fontWeight: "bold",
   },
   chatContainer: {
     flexGrow: 1,
@@ -79,34 +99,37 @@ const styles = StyleSheet.create({
   },
   messageContainer: {
     marginBottom: 10,
-    alignSelf: 'flex-start',
+    marginTop:10,
   },
   messageContainerRight: {
-    alignSelf: 'flex-end',
+    alignSelf: "flex-end",
+  },
+  messageContainerLeft:{
+    alignSelf:"flex-start",
   },
   messageBubble: {
-    maxWidth: '100%',
+    maxWidth: "100%",
     borderRadius: 20,
     padding: 15,
   },
   sentMessage: {
-    backgroundColor: '#4267B2',
+    backgroundColor: "#4267B2",
   },
   receivedMessage: {
-    backgroundColor: '#ECEFF1',
+    backgroundColor: "#ECEFF1",
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
   },
   messageText: {
     fontSize: 16,
-    color: 'black',
+    color: "black",
   },
   inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     paddingHorizontal: 10,
     borderTopWidth: 1,
-    borderTopColor: '#ccc',
+    borderTopColor: "#ccc",
   },
   iconButton: {
     padding: 5,
@@ -116,14 +139,14 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 20,
     fontSize: 16,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: "#f0f0f0",
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     borderRadius: 30,
-    marginRight: 10,
+    marginRight: 5,
   },
   sendButton: {
-    backgroundColor: '#4267B2',
+    backgroundColor: "#4267B2",
     borderRadius: 30,
     padding: 10,
   },
