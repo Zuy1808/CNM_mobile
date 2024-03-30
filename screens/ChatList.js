@@ -1,9 +1,18 @@
 import React from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image, Button } from 'react-native';
+import { useAuth } from '../provider/AuthProvider';
 
 const ChatList = ({ chats, navigation }) => {
+  const { setUserVerified } = useAuth();
+
+  const handleLogout = () => {
+    setUserVerified(null);
+  }
+
   return (
     <View style={styles.container}>
+      {/* logout */}
+      <Button title="Logout" onPress={handleLogout} />
       <FlatList
         data={chats}
         renderItem={({ item }) => (

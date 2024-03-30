@@ -1,15 +1,29 @@
-import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ActivityIndicator } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import authService from '../services/authService';
+import { useAuth } from '../provider/AuthProvider';
 
 const LoginScreen = ({navigation}) => {
-    const [username, setUsername] = React.useState('');
+    const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
+    const [loading, setLoading] = React.useState(false);
+    const { setUserVerified, userVerified } = useAuth();
+
+    console.log("user",userVerified);
+
+    useEffect(() => {
+        if (userVerified) {
+            navigation.navigate('ChatList');
+        } else {
+            navigation.navigate('Login');
+        }
+    }, [userVerified])
 
     const handleLogin = () => {
         // Ví dụ: fetch('/api/login', {
     //     method: 'POST',
-    //     body: JSON.stringify({ username, password }),
+    //     body: JSON.stringify({ email, password }),
     //     headers: {
     //         'Content-Type': 'application/json'
     //     }
@@ -35,8 +49,27 @@ const LoginScreen = ({navigation}) => {
         navigation.navigate('Signup');
     };
 
-    const handleChat = () => {
-      navigation.navigate('ChatList');
+    const handleSignIn = async () => {
+      setLoading(true);
+      try {
+        const result = await authService.login(email, password);
+
+        if (result.user.verify) {
+            // toast.success('Login successful');
+            setUserVerified(result.user);
+        } else {
+            // toast.error(result.message);
+            console.log(result.message);
+        }
+    } catch (error) {
+        // toast.error(
+        //     error.response.data.message ||
+        //         'An error occurred. Please try again.',
+        // );
+        console.log(error);
+    } finally {
+        setLoading(false);
+    }
   };
 
     return (
@@ -50,15 +83,21 @@ const LoginScreen = ({navigation}) => {
           placeholder="Email"
           placeholderTextColor="#ccc"
           style={styles.input}
+          onChangeText={(text) => setEmail(text)}
         />
         <TextInput
           placeholder="Mật khẩu"
           placeholderTextColor="#ccc"
           secureTextEntry={true}
           style={styles.input}
+          onChangeText={(text) => setPassword(text)}
         />
-        <TouchableOpacity style={styles.button} onPress={handleChat}>
+        <TouchableOpacity style={styles.button} onPress={handleSignIn}>
+          {loading ? (
+            <ActivityIndicator color="#fff" size="small" />
+          ) : (
           <Text style={styles.buttonText}>Đăng nhập</Text>
+          )}
         </TouchableOpacity>
         <View style={styles.linkContainer}>
           <TouchableOpacity>
