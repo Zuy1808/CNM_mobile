@@ -7,6 +7,7 @@ import ChatList from './screens/ChatList';
 import ChatScreen from './screens/ChatScreen';
 import chats from './data/chats';
 import { AuthProvider } from './provider/AuthProvider';
+import OtpScreen from './screens/OtpScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -20,6 +21,7 @@ const App = () => {
               <Stack.Screen name="Signup" component={SignupScreen} />
               <Stack.Screen name="ChatList" component={({ navigation }) => <ChatList chats={chats} navigation={navigation} />} />
               <Stack.Screen name="ChatScreen" component={ChatScreen} />   
+              <Stack.Screen name="OtpScreen" component={OtpScreen}/>
           </Stack.Navigator>
       </NavigationContainer>
       </AuthProvider>
