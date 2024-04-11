@@ -28,7 +28,7 @@ const SignupScreen = ({ navigation }) => {
     }
 
     if (!validateUsername(username)) {
-      setErrorMessage("Username chỉ có chữ.");
+      setErrorMessage("Username có ký tự không hợp lệ.");
       return;
     }
 
@@ -80,7 +80,7 @@ const SignupScreen = ({ navigation }) => {
   };
 
   const validateUsername = (username) => {
-    const usernameRegex = /^[a-zA-Z]+$/;
+    const usernameRegex = /^[a-zA-Z1-9]+$/;
     return usernameRegex.test(username);
   };
 

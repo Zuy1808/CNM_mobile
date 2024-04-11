@@ -29,7 +29,7 @@ const LoginScreen = ({ navigation }) => {
   }, [userVerified]);
 
   const handleForgotPassword = () => {
-    //navigation.navigate('ForgotPasswordScreen');
+    navigation.navigate('ForgotPassword');
   };
 
   const handleSignUp = () => {
@@ -70,7 +70,7 @@ const LoginScreen = ({ navigation }) => {
       if (error.response && error.response.status === 401) {
         setErrorMessage("Email hoặc mật khẩu không đúng.");
       } else {
-        setErrorMessage("Email hoặc mật khẩu không đúng."); // Xử lý các lỗi khác
+        setErrorMessage("Email hoặc mật khẩu không đúng."); 
         console.log(error);
       }
     } finally {
@@ -119,7 +119,7 @@ const LoginScreen = ({ navigation }) => {
           )}
         </TouchableOpacity>
         <View style={styles.linkContainer}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={handleForgotPassword}>
             <Text style={styles.link}>Quên mật khẩu?</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={handleSignUp}>
